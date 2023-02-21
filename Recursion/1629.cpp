@@ -4,12 +4,10 @@ using namespace std;
 
 
 long long divide(long long A, long long B, long long C) {
-	cout << "B : " << B << " ";
 	if(B == 1) {
 		return A%C;
 	}
 	long long tmp = divide(A, B/2, C) % C;
-	cout << "tmp : " << tmp << endl;
 	if(B % 2 == 0) {
 		return tmp*tmp%C;
 	}
