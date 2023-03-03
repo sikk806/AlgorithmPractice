@@ -2,52 +2,45 @@
 
 using namespace std;
 
-int vertex[801];
-int dij[801];
-
-// 0. DIJ 구현 (3.2) 
-// 1. 1에서 V1 또는 V2로 가는 길 찾기
-// 2. V1또는 V2에서 V2E또는 V1으로 가는 길 찾기
-// 3. V1, V2에서 N으로 가는 길 찾기 
+int vertex[20001]; // 정점으로 부터의 길이
+int dij[20001];
+int INF = 999999;
 
 int main(void) {
-	fill_n(dij, 801, 200001);
-	fill_n(vertex, 801, 999999999);
+	fill_n(dij, 20001, 11);
+	fill_n(vertex, 20001, 999999);
 	
-	vector<vector<pair<int, int>> > dij(801);
+	vector<vector<pair<int, int>> > dij(20001);
 	
-	int N, E;
-	cin >> N >> E;
+	int V, E, K, u, v, w;
 	
-	int a, b, c;
+	cin >> V >> E;
+	cin >> K;
+	
 	for(int i = 0; i < E; i++) {
-		cin >> a >> b >> c;
-		dij[a].push_back(make_pair(b, c));
-		dij[b].push_back(make_pair(a, c));
+		cin >> u >> v >> w;
+		dij[u].push_back(make_pair(v, w));
 	}
 	
-	int v1, v2;
-	cin >> v1 >> v2;
-	
-	vertex[1] = 0;
+	vertex[K] = 0;
 	priority_queue<pair<int, int> > q;
-	q.push(make_pair(-vertex[1], 1));
+	q.push(make_pair(-vertex[K], K));
 	
 	while(!q.empty()) {
 		int start_point_vxt = -q.top().first;
 		int start_point = q.top().second;
-		q.pop();
-		for(int i =0; i < dij[start_point].size(); i++) {
+		for(int i = 0; i < dij[start_point].size(); i++) {
 			int target = dij[start_point][i].first;
 			if(vertex[target] > dij[start_point][i].second + vertex[start_point]) {
 				vertex[target] = dij[start_point][i].second + vertex[start_point];
 				q.push(make_pair(-vertex[target], dij[start_point][i].first));
 			}
 		}
+		q.pop();
 	}
 	
-	for(int i = 1; i <= N; i++) {
-		if(vertex[i] < 99999999) {
+	for(int i = 1; i <= V; i++) {
+		if(vertex[i] < INF) {
 			cout << vertex[i] << "\n";
 		}
 		else {
@@ -56,5 +49,4 @@ int main(void) {
 	}
 	
 	return 0;
-	
 }
