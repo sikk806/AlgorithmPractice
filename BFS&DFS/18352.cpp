@@ -17,7 +17,6 @@ int main(void) {
 	for(int i = 0; i < M; i++) {
 		cin >> A >> B;
 		city[A].push_back(B);
-		city[B].push_back(A);
 	}
 	
 	queue<int> q;
@@ -27,10 +26,14 @@ int main(void) {
 	int cnt = 0;
 	int q_size = q.size();
 	
-	while(!q.empty() && cnt != K) {
+	while(!q.empty()) {
 		if(q_size == 0) {
 			q_size = q.size();
 			cnt++;
+		}
+		
+		if(cnt == K) {
+			break;
 		}
 		
 		int start_point = q.front();
@@ -44,15 +47,19 @@ int main(void) {
 			}
 		}
 	}
-	
+	vector<int> v;
 	if(q.empty()) {
-		cout << "-1";
+		v.push_back(-1);
 	}
 	else {
-		for(int i = 0; i < q.size(); i++) {
-			cout << q.front() << endl;
+		for(int i = 0; i < q_size; i++) {
+			v.push_back(q.front());
 			q.pop();
 		}
 	}
 	
+	sort(v.begin(), v.end());
+	for(int i =0; i < v.size(); i++) {
+		cout << v[i] << '\n';
+	}
 }
