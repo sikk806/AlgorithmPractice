@@ -30,6 +30,7 @@ int solution(int N, int number) {
             for(iter_begin = DP[j].begin(); iter_begin != DP[j].end(); iter_begin++) {
                 for(iter_end = DP[i-j].begin(); iter_end != DP[i-j].end(); iter_end++) {
                     DP[i].insert(*iter_begin+(*iter_end));
+                
                     if(*iter_begin-(*iter_end) >= 0)
                         DP[i].insert(*iter_begin-(*iter_end));
                     if(*iter_end != 0)
