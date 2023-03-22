@@ -12,7 +12,7 @@ public:
 	const int& cal(int d) {
 		k = 4;
 		int& A = d;
-		cout << &A << endl;
+		//cout << &A << endl;
 		return A;
 	}
 };
@@ -23,13 +23,28 @@ int main(void) {
 	
 	Test t;
 	
-	int d = 2;
-	cout << &d << endl;
+	char d = '3';
+	//cout << &d << endl;
 	const int& c = t.cal(d);
 	
-	int *p = &d;
+	//int *p = &d;
+
+	char hello[] = "Hello";
+	char gello[] = "Gello";
 	
-	cout << &p << endl;
-	cout << &c << endl;
+	const char * p= hello;
+	//const char *p = &d;
+	//int *const p = &b;
+	
+	//*p = &d;
+	
+	//*p = 1;
+	
+	//cout << p << endl;
+	int k;
+	cout << k << endl;
+	//cout << b << endl;
+	//hello[0] = 'G';
+	//cout << p << endl;
 	//int& C = t.cal(d);
 }
