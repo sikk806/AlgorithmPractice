@@ -7,7 +7,7 @@ struct OWtest {
 	virtual void TP2() { cout << "Hello-P2" << endl; }
 };
 struct OWtest_ch : public OWtest {
-	void TP() override { cout << "Hello-C" << endl; }
+	void TP() { cout << "Hello-C" << endl; }
 	void TP2() { cout << "Hello-C2" << endl; }
 };
 
