@@ -25,14 +25,29 @@ void push(int node) {
 	}
 } 
 
-void pop(int node) {
-	// node의 위치를 찾을것. 
+void pop() {
+	//힙의 삭제는 가장 큰 값인 루트를 삭제하는 것. 
+	//마지막 node와 뺄 node 바 꿈
+	int temp = heap_arr[1]; 
 	heap_arr[1] = heap_arr[heap_size];
-	heap_arr[heap_size] = node;
-	int index = heap_size;
-	while(index < heap_size && heap_arr[index * 2] > node) {
+	heap_arr[heap_size] = 0;
+	 
+	int index = 1;
+	while(index < heap_size && heap_arr[index * 2] != 0) {
+		if(heap_arr[index] > heap_arr[index*2] && heap_arr[index] > heap_arr[index*2 +1]) {
+			break;
+		}
+		if(heap_arr[index*2] > heap_arr[index*2+1]) {
+			swap(heap_arr[index*2], heap_arr[index], index * 2);
+			index *= 2;
+		}
+		else {
+			swap(heap_arr[index*2 + 1], heap_arr[index], index * 2 + 1);
+			index = index * 2 + 1;
+		}
 	}
-	
+	heap_arr[heap_size] = 0;
+	heap_size--;
 }
 
 int main(void) {
@@ -50,7 +65,7 @@ int main(void) {
 		 
 		cin >> node;
 		
-		if(node == -1) {
+		if(node <= 0) {
 			break;
 		}
 		
@@ -68,7 +83,7 @@ int main(void) {
 					break;
 				}
 				else if(pp == 2) {
-					pop(node);
+					pop();
 					break;
 				}
 				else {
