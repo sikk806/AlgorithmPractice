@@ -34,7 +34,6 @@ void playUp(int board[][20], int cnt) {
 			else {
 				if(board[i][j] == board[position_i][j]) {
 					board[position_i][j] *= 2;
-					if(max_no < board[position_i][j]) max_no = board[position_i][j];
 					board[i][j] = 0;
 					position_i++;
 				}
@@ -48,12 +47,14 @@ void playUp(int board[][20], int cnt) {
 			position_i++;
 		}
 	}
+//	cout << "UP" << endl;
 //	for(int a = 0; a < N; a++) {
 //		for(int b = 0; b < N; b++) {
 //			cout << board[a][b] << " ";
 //		}
 //		cout << endl;
 //	}
+//	cout << endl;
 	play(board, cnt+1);
 }
 
@@ -84,7 +85,6 @@ void playDown(int board[][20], int cnt) {
 			else {
 				if(board[i][j] == board[position_i][j]) {
 					board[position_i][j] *= 2;
-					if(max_no < board[position_i][j]) max_no = board[position_i][j];
 					board[i][j] = 0;
 					position_i--;
 				}
@@ -99,6 +99,15 @@ void playDown(int board[][20], int cnt) {
 			position_i--;
 		}
 	}
+//	cout << "DOWN" << endl;
+//	for(int a = 0; a < N; a++) {
+//		for(int b = 0; b < N; b++) {
+//			cout << board[a][b] << " ";
+//		}
+//		cout << endl;
+//	}
+//	cout << endl;
+	
 	play(board, cnt+1);
 	
 }
@@ -130,7 +139,6 @@ void playLeft(int board[][20], int cnt) {
 			else {
 				if(board[i][j] == board[i][position_j]) {
 					board[i][position_j] *= 2;
-					if(max_no < board[i][position_j]) max_no = board[i][position_j];
 					board[i][j] = 0;
 					position_j++;
 				}
@@ -144,6 +152,15 @@ void playLeft(int board[][20], int cnt) {
 			position_j++;
 		}
 	}
+//	cout << "LEFT" << endl;
+//	for(int a = 0; a < N; a++) {
+//		for(int b = 0; b < N; b++) {
+//			cout << board[a][b] << " ";
+//		}
+//		cout << endl;
+//	}
+//	cout << endl;
+	
 	play(board, cnt+1);
 }
 
@@ -174,7 +191,6 @@ void playRight(int board[][20], int cnt) {
 			else {
 				if(board[i][j] == board[i][position_j]) {
 					board[i][position_j] *= 2;
-					if(max_no < board[i][position_j]) max_no = board[i][position_j];
 					board[i][j] = 0;
 					position_j--;
 				}
@@ -189,23 +205,36 @@ void playRight(int board[][20], int cnt) {
 			position_j--;
 		}
 	}
+//	cout << "RIGHT" << endl;
+//	for(int a = 0; a < N; a++) {
+//		for(int b = 0; b < N; b++) {
+//			cout << board[a][b] << " ";
+//		}
+//		cout << endl;
+//	}
+//	cout << endl;
+	
 	play(board, cnt+1);
 	
 }
 
 void play(int board[][20], int cnt) {
-	if(cnt == 5) {
-			for(int a = 0; a < N; a++) {
-		for(int b = 0; b < N; b++) {
-			cout << board[a][b] << " ";
+	if(cnt == 6) {
+		for(int a = 0; a < N; a++) {
+			for(int b = 0; b < N; b++) {
+				if(max_no < board[a][b]) max_no = board[a][b];
+			}
 		}
-		cout << endl;
-	}
 		return;
 	}
+	int cpy_board[20][20] = {0, };
+	copy(&board[0][0], &board[0][0]+400, &cpy_board[0][0]);
 	playUp(board, cnt);
+	copy(&cpy_board[0][0], &cpy_board[0][0]+400, &board[0][0]);
 	playDown(board, cnt);
+	copy(&cpy_board[0][0], &cpy_board[0][0]+400, &board[0][0]);
 	playLeft(board, cnt);
+	copy(&cpy_board[0][0], &cpy_board[0][0]+400, &board[0][0]);
 	playRight(board, cnt);
 }
 
@@ -222,6 +251,7 @@ int main(void) {
 				max_no = board[i][j];
 		}
 	}
+	cout << endl;
 	play(board, 1);
 	
 	cout << max_no;
