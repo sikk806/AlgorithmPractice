@@ -2,23 +2,17 @@
 
 using namespace std;
 
-struct MyStruct
-{
-  int i;
-};
-
-MyStruct bar () 
-{
-  MyStruct result = { 5 };
-  return result;
-}
-
-/* won't compile; 'lvalue required as unary & operand */
-void qux () 
-{
-  int *j = &bar().i;
-}
-
 int main(void) {
-	qux();
+	int a = 0;
+	int *ptr;
+	int **ptr2;
+	
+	ptr2 = &ptr;
+	
+	ptr = &a;
+	
+	cout << ptr2 << endl;
+	cout << *ptr2 << endl;
+	cout << ptr << endl;
+	
 }
