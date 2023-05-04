@@ -12,9 +12,8 @@ void dp(int sum_bag, int sum_price, int start_point) {
         highest_sum = max(highest_sum, sum_price);
         return;
     }
-    // 현재 아이템을 선택하지 않는 경우
     dp(sum_bag, sum_price, start_point + 1);
-    // 현재 아이템을 선택하는 경우
+    
     dp(sum_bag + bag[start_point].first, sum_price + bag[start_point].second, start_point + 1);
 }
 
