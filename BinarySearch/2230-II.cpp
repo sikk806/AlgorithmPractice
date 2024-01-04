@@ -44,7 +44,6 @@ int main(void)
 			minus = A[end] - A[start];
 		}
 	}
-	if(big > minus && minus >= M) big = minus;
 	cout << big;
 	return 0;
 }
